@@ -56,6 +56,7 @@ protocol CropViewModelProtocol: AnyObject {
 extension CropViewModelProtocol {
     func setInitialStatus() {
         viewStatus = .touchImage
+        
     }
     
     func setRotatingStatus(by angle: CGAngle) {
