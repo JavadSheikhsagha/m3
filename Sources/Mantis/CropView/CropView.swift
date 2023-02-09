@@ -141,14 +141,14 @@ class CropView: UIView {
         case .degree90Rotating:
             cropMaskViewManager.showVisualEffectBackground(animated: true)
             cropAuxiliaryIndicatorView.isHidden = true
-            rotationDial?.isHidden = true
+//            rotationDial?.isHidden = true
         case .touchImage:
             cropMaskViewManager.showDimmingBackground(animated: true)
             cropAuxiliaryIndicatorView.gridLineNumberType = .crop
             cropAuxiliaryIndicatorView.setGrid(hidden: false, animated: true)
         case .touchCropboxHandle(let tappedEdge):
             cropAuxiliaryIndicatorView.handleCornerHandleTouched(with: tappedEdge)
-            rotationDial?.isHidden = true
+//            rotationDial?.isHidden = true
             cropMaskViewManager.showDimmingBackground(animated: true)
         case .touchRotationBoard:
             cropAuxiliaryIndicatorView.gridLineNumberType = .rotate
@@ -156,7 +156,7 @@ class CropView: UIView {
             cropMaskViewManager.showDimmingBackground(animated: true)
         case .betweenOperation:
             cropAuxiliaryIndicatorView.handleEdgeUntouched()
-            rotationDial?.isHidden = false
+//            rotationDial?.isHidden = false
             adaptAngleDashboardToCropBox()
             cropMaskViewManager.showVisualEffectBackground(animated: true)
             checkImageStatusChanged()
@@ -230,55 +230,55 @@ class CropView: UIView {
     }
     
     private func setupRotationDial() {
-        guard cropViewConfig.showRotationDial, let rotationDial = rotationDial else {
-            return
-        }
+//        guard cropViewConfig.showRotationDial, let rotationDial = rotationDial else {
+//            return
+//        }
         
-        rotationDial.reset()
+//        rotationDial.reset()
         
         let boardLength = min(bounds.width, bounds.height) * 0.6
         let dialFrame = CGRect(x: 0,
                                y: 0,
                                width: boardLength,
                                height: angleDashboardHeight)
-        rotationDial.setup(with: dialFrame)
-        rotationDial.isUserInteractionEnabled = true
-        
-        rotationDial.setRotationCenter(by: cropAuxiliaryIndicatorView.center, of: self)
-        
-        rotationDial.didRotate = { [unowned self] angle in
-            self.viewModel.setRotatingStatus(by: angle)
-        }
-        
-        rotationDial.didFinishedRotate = { [unowned self] in
-            self.viewModel.setBetweenOperationStatus()
-        }
-        
-        rotationDial.rotateDialPlate(by: CGAngle(radians: viewModel.radians))
-        rotationDial.bringSelfToFront()
+//        rotationDial.setup(with: dialFrame)
+//        rotationDial.isUserInteractionEnabled = true
+//
+//        rotationDial.setRotationCenter(by: cropAuxiliaryIndicatorView.center, of: self)
+//
+//        rotationDial.didRotate = { [unowned self] angle in
+//            self.viewModel.setRotatingStatus(by: angle)
+//        }
+//
+//        rotationDial.didFinishedRotate = { [unowned self] in
+//            self.viewModel.setBetweenOperationStatus()
+//        }
+//
+//        rotationDial.rotateDialPlate(by: CGAngle(radians: viewModel.radians))
+//        rotationDial.bringSelfToFront()
                 
         adaptAngleDashboardToCropBox()
     }
     
     private func adaptAngleDashboardToCropBox() {
-        guard let rotationDial = rotationDial else { return }
+//        guard let rotationDial = rotationDial else { return }
         
-        if Orientation.isPortrait {
-            rotationDial.transform = CGAffineTransform(rotationAngle: 0)
-            rotationDial.frame.origin.x = cropAuxiliaryIndicatorView.frame.origin.x +
-            (cropAuxiliaryIndicatorView.frame.width - rotationDial.frame.width) / 2
-            rotationDial.frame.origin.y = cropAuxiliaryIndicatorView.frame.maxY
-        } else if Orientation.isLandscapeLeft {
-            rotationDial.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
-            rotationDial.frame.origin.x = cropAuxiliaryIndicatorView.frame.maxX
-            rotationDial.frame.origin.y = cropAuxiliaryIndicatorView.frame.origin.y +
-            (cropAuxiliaryIndicatorView.frame.height - rotationDial.frame.height) / 2
-        } else if Orientation.isLandscapeRight {
-            rotationDial.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
-            rotationDial.frame.origin.x = cropAuxiliaryIndicatorView.frame.minX - rotationDial.frame.width
-            rotationDial.frame.origin.y = cropAuxiliaryIndicatorView.frame.origin.y +
-            (cropAuxiliaryIndicatorView.frame.height - rotationDial.frame.height) / 2
-        }
+//        if Orientation.isPortrait {
+//            rotationDial.transform = CGAffineTransform(rotationAngle: 0)
+//            rotationDial.frame.origin.x = cropAuxiliaryIndicatorView.frame.origin.x +
+//            (cropAuxiliaryIndicatorView.frame.width - rotationDial.frame.width) / 2
+//            rotationDial.frame.origin.y = cropAuxiliaryIndicatorView.frame.maxY
+//        } else if Orientation.isLandscapeLeft {
+//            rotationDial.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+//            rotationDial.frame.origin.x = cropAuxiliaryIndicatorView.frame.maxX
+//            rotationDial.frame.origin.y = cropAuxiliaryIndicatorView.frame.origin.y +
+//            (cropAuxiliaryIndicatorView.frame.height - rotationDial.frame.height) / 2
+//        } else if Orientation.isLandscapeRight {
+//            rotationDial.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+//            rotationDial.frame.origin.x = cropAuxiliaryIndicatorView.frame.minX - rotationDial.frame.width
+//            rotationDial.frame.origin.y = cropAuxiliaryIndicatorView.frame.origin.y +
+//            (cropAuxiliaryIndicatorView.frame.height - rotationDial.frame.height) / 2
+//        }
     }
     
     func updateCropBoxFrame(withTouchPoint touchPoint: CGPoint) {
@@ -670,7 +670,7 @@ extension CropView {
     private func setRotation(byRadians radians: CGFloat) {
         cropWorkbenchView.transform = CGAffineTransform(rotationAngle: radians)
         updatePosition(by: radians)
-        rotationDial?.rotateDialPlate(to: CGAngle(radians: radians), animated: false)
+//        rotationDial?.rotateDialPlate(to: CGAngle(radians: radians), animated: false)
     }
     
     func setFixedRatioCropBox(zoom: Bool = true, cropBox: CGRect? = nil) {
@@ -877,7 +877,7 @@ extension CropView: CropViewProtocol {
         }
         
         if rotateDial {
-            rotationDial?.rotateDialPlate(by: CGAngle(radians: viewModel.radians))
+//            rotationDial?.rotateDialPlate(by: CGAngle(radians: viewModel.radians))
             adaptAngleDashboardToCropBox()
         }
     }
